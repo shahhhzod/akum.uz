@@ -1,0 +1,27 @@
+<!-- templates/shop/news_detail.html -->
+{% extends 'shop/base.html' %}
+
+{% block title %}
+{{ news_item.title }}
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h1 class="mb-4">{{ news_item.title }}</h1>
+            <img src="{{ news_item.image.url }}" class="img-fluid mb-4" alt="{{ news_item.title }}">
+            <div class="content mb-4">
+                {{ news_item.content|linebreaks|safe }}
+            </div>
+            <p class="text-muted"><small>Опубликовано: {{ news_item.created_at }}</small></p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+<style>
+    .content > * {
+        margin-bottom: 1.5em; /* Отступ между всеми элементами внутри content */
+    }
+</style>

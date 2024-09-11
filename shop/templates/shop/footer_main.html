@@ -1,0 +1,52 @@
+<footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <ul class="footer-list">
+          <div class="list-title">Торговые марки</div>
+          {% for product_page in product_pages %}
+          <a class="list-item" href="{{ product_page.get_absolute_url }}">{{ product_page.name }}</a>
+          {% endfor %}
+        </ul>
+        <ul class="footer-list">
+          <div class="list-title">О Нас</div>
+          <li class="list-item"><a href="">О компании</a></li>
+          <li class="list-item"><a href="">Работа</a></li>
+          <li class="list-item"><a href="{% url 'contact' %}">Контакты</a></li>
+          <li class="list-item"><a href="">Экспорт</a></li>
+          <li class="list-item"><a href="{% url 'news' %}">Новости</a></li>
+          <li class="list-item"><a href="">Скачать</a></li>
+          <li class="nav-item"><a  href="">Стать партнером</a></li>
+        </ul>
+        <ul class="footer-list">
+          <div class="list-title">Контакты</div>
+          {% for contact in contacts %}
+          <li class="list-item contact">
+              <i class="{{ contact.icon_class }}"></i>
+              {% if contact.contact_type == 'phone' %}
+                  <a href="tel:{{ contact.value }}">{{ contact.value }}</a>
+              {% elif contact.contact_type == 'email' %}
+                  <a href="mailto:{{ contact.value }}">{{ contact.value }}</a>
+              {% else %}
+                  {{ contact.value }}
+              {% endif %}
+          </li>
+      {% endfor %}
+        </ul>
+      </div>
+      <div class="footer-mid">
+        <div class="footer__content">
+          <p>LLC "AKUM" has been engaged in the production and sale of rechargeable batteries for 20 years.
+            Our PAMIR brand is a new generation of batteries</p>
+        </div>
+        <div class="footer__social">
+          {% for social in social_links %}
+          <a href="{{ social.url }}"><img src="{{ social.icon_image.url }}" alt="{{ social.name }}" style="width: 48px; height: 48px;"></a>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="copy">2021-2023. LLC "AKUM", official website.</p>
+        <p class="creator"><a href="https://www.facebook.com/dushanbe.digital/?locale=ru_RU">Developed by : DushanbeDigital</a></p>
+      </div>
+    </div>
+  </footer>

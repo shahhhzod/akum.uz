@@ -1,0 +1,164 @@
+{% extends 'shop/base_shop.html' %}
+
+{% block title %}Корзина | Akum.uz{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Корзина</h2>
+    <div class="row">
+        <!-- Корзина товаров -->
+        <div class="col-lg-8">
+            {% if cart_items %}
+                {% for item in cart_items %}
+                <hr>
+                <div class="d-flex align-items-center mb-4">
+                    <img class="p-3" src="{{ item.product.images.first.image.url }}" class="img-fluid" style="width: 100px; height: auto;" alt="">
+                    <div class="ml-3 w-100">
+                        <a href="{% url 'product_detail' item.product.id %}" class="text-dark text-decoration-none"><h5>{{ item.product.name|truncatewords:12 }}</h5></a>
+                        <p class="text-muted">{{ item.product.description|truncatewords:10 }}</p>
+                        
+                        <!-- Input для изменения количества товара -->
+                        <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mb-3">
+                            <div class="input-group mb-2 mb-md-0" style="max-width: 140px;">
+                                <div class="input-group-prepend">
+                                    <button class="btn btn-quantity btn-outline-secondary update-cart" data-product="{{ item.product.id }}" data-action="remove" type="button">-</button>
+                                </div>
+                                <input type="text" class="quantity-display form-control text-center" id="quantity-{{ item.product.id }}" value="{{ item.quantity }}" data-max="{{ item.product.stock }}" readonly>
+                                <div class="input-group-append">
+                                    <button class="btn btn-quantity btn-outline-secondary update-cart" data-product="{{ item.product.id }}" data-action="add" type="button">+</button>
+                                </div>
+                            </div>
+                            <!-- Corrected: Dynamic total price for each item -->
+                            <span class="font-weight-bold item-total-price" id="total-price-{{ item.product.id }}">{{ item.get_total_price }} UZS</span>
+                            <a href="{% url 'remove_from_cart' item.product.id %}" class="text-danger text-decoration-none">Удалить</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                <hr>
+            {% else %}
+                <p>Ваша корзина пуста.</p>
+            {% endif %}
+        </div>
+
+        <!-- Итоговая стоимость -->
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Итого</h5>
+                    <hr>
+                    <div class="d-flex justify-content-between">
+                        <span>Товаров ({{ cart_items.count }}) шт.</span>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <span>Сумма</span>
+                        <span id="total-cost">{{ total_price }} UZS</span>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <span>Скидка</span>
+                        <span id="total-discount">{{ total_discount }} UZS</span>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <span>Доставка</span>
+                        <span id="shipping-cost">{{ shipping_cost }} UZS</span>
+                    </div>
+                    <hr>
+                    <div class="d-flex justify-content-between font-weight-bold">
+                        <span>Итого</span>
+                        <!-- Use a unique ID to update the final total dynamically -->
+                        <span class="font-weight-bold" id="final-total">{{ final_total }} UZS</span>
+                    </div>
+                    
+                    <!-- Способ оплаты -->
+                    <h5 class="mt-4">Способ оплаты</h5>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="paymentMethod" id="cashOnDelivery" value="cash" checked>
+                        <label class="form-check-label" for="cashOnDelivery">
+                            Наличные курьеру
+                        </label>
+                    </div>
+
+                    <!-- Способ доставки -->
+                    <h5 class="mt-4">Способ доставки</h5>
+                    <div class="form-check">
+                        <input class="form-check-input delivery-method" type="radio" name="deliveryMethod" id="courierDelivery" value="courier" checked>
+                        <label class="form-check-label" for="courierDelivery">
+                            Доставка курьером (500 UZS)
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input delivery-method" type="radio" name="deliveryMethod" id="pickup" value="pickup">
+                        <label class="form-check-label" for="pickup">
+                            Самовывоз (Бесплатно)
+                        </label>
+                    </div>
+
+                    <a href="{% url 'checkout' %}" class="btn btn-primary w-100 mt-4">Оформить заказ</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.querySelectorAll('.update-cart').forEach(button => {
+    button.addEventListener('click', function() {
+        const productId = this.dataset.product;
+        const action = this.dataset.action;
+        
+        fetch("{% url 'update_cart' %}", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'X-CSRFToken': '{{ csrf_token }}'
+            },
+            body: `product_id=${productId}&action=${action}`
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) {
+                alert(data.error);
+            } else {
+                // Update the quantities and prices
+                document.getElementById(`quantity-${productId}`).value = data.quantity;
+                // Update total price for the current item
+                document.getElementById(`total-price-${productId}`).textContent = data.total_price + ' UZS';
+                
+                // Update cart totals
+                document.getElementById('total-cost').textContent = data.total_cost + ' UZS';
+                document.getElementById('total-discount').textContent = '-' + data.total_discount + ' UZS';
+                document.getElementById('shipping-cost').textContent = data.shipping_cost + ' UZS';
+                document.getElementById('final-total').textContent = data.final_total + ' UZS';
+            }
+        })
+        .catch(error => console.error('Error:', error));
+    });
+});
+
+document.querySelectorAll('.delivery-method').forEach(input => {
+    input.addEventListener('change', function() {
+        const selectedMethod = this.value;
+        
+        fetch("{% url 'update_cart' %}", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'X-CSRFToken': '{{ csrf_token }}'
+            },
+            body: `delivery_method=${selectedMethod}`
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) {
+                alert(data.error);
+            } else {
+                // Update shipping cost and final total
+                document.getElementById('shipping-cost').textContent = data.shipping_cost + ' UZS';
+                document.getElementById('final-total').textContent = data.final_total + ' UZS';
+            }
+        })
+        .catch(error => console.error('Error:', error));
+    });
+});
+</script>
+{% endblock %}

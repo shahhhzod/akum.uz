@@ -1,0 +1,35 @@
+{% extends 'shop/base_shop.html' %}
+
+{% block title %}Cписок желаний | Akum.uz{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-5">Список желаний</h2>
+    <div class="row">
+        {% if products %}
+            {% for product in products %}
+                <!-- Display product card similar to your cart and shop pages -->
+                <div class="col-lg-3 col-md-4 col-sm-6 mb-4"> <!-- Изменен размер карточек -->
+                    <div class="card border-0"> <!-- Убран бордер -->
+                        <a href="{% url 'product_detail' product.id %}">
+                            <div class="card-img-top d-flex align-items-center justify-content-center">
+                                {% if product.images.first %}
+                                    <img src="{{ product.images.first.image.url }}" alt="{{ product.images.first.alt_text }}" class="img-fluid" width="220px">
+                                {% endif %}
+                            </div>
+                        </a>
+                        <div class="card-body">
+                            <h5 class="card-title">{{ product.name }}</h5>
+                            <p class="card-text">{{ product.description|truncatewords:15 }}</p>
+                            <a href="{% url 'add_to_cart' product.id %}" class="btn btn-sm btn-primary mb-2">Добавить в корзину</a> <!-- Уменьшены кнопки и добавлен отступ -->
+                            <a href="{% url 'remove_from_wishlist' product.id %}" class="btn btn-sm btn-primary">Удалить</a> <!-- Уменьшены кнопки -->
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>Ваш список желаний пуст.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

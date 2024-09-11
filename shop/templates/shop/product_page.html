@@ -1,0 +1,49 @@
+<!-- templates/shop/product_page.html -->
+{% extends 'shop/base.html' %}
+
+{% block content %}
+
+
+<div class="container mt-5">
+
+     <!-- Первый блок с красным задним фоном -->
+ <div class="jumbotron jumbotron-fluid" style="background-color: #db0011; color: white;"><br>
+    <div class="container">
+        <h1 class="display-4 text-center">Линейка аккумуляторов «{{ page.name }}»</h1>
+        <p class="lead text-center">{{ page.content }}</p><br>
+    </div>
+</div>
+
+<div class="row mt-5">
+    {% for battery in batteries %}
+    <div class="col-md-4 mb-4">
+        <div class="card">
+            {% if battery.image %}
+                <img src="{{ battery.image.url }}" class="card-img-top" alt="{{ battery.title }}">
+            {% endif %}
+            <div class="card-body">
+                <h5 class="card-title">{{ battery.title }}</h5>
+                <p class="card-text">
+                    {% if battery.product_code %}Код изделия: {{ battery.product_code }}<br>{% endif %}
+                    {% if battery.box_code %}Код коробки: {{ battery.box_code }}<br>{% endif %}
+                    {% if battery.power %}Мощность: {{ battery.power }}<br>{% endif %}
+                    {% if battery.capacity %}Значение A (EN): {{ battery.capacity }}<br>{% endif %}
+                    {% if battery.polarity %}Полюсное направление: {{ battery.polarity }}<br>{% endif %}
+                    {% if battery.terminal_type %}Тип полюса: {{ battery.terminal_type }}<br>{% endif %}
+                    {% if battery.weight %}Общий вес (кг): {{ battery.weight }}<br>{% endif %}
+                    {% if battery.width %}Ширина (мм): {{ battery.width }}<br>{% endif %}
+                    {% if battery.length %}Длина (мм): {{ battery.length }}<br>{% endif %}
+                    {% if battery.height %}Высота с клеммой (мм): {{ battery.height }}<br>{% endif %}
+                    {% if battery.nominal_capacity %}Номинальная емкость: {{ battery.nominal_capacity }}<br>{% endif %}
+                    {% if battery.cold_cranking_amperage %}Ток холодной прокрутки: {{ battery.cold_cranking_amperage }}<br>{% endif %}
+                    {% if battery.warranty %}Гарантия: {{ battery.warranty }}<br>{% endif %}
+                    {% if battery.polarity_type %}Полярность: {{ battery.polarity_type }}<br>{% endif %}
+                </p>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    
+</div>
+</div>
+{% endblock %}

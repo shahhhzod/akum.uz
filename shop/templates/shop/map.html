@@ -1,0 +1,85 @@
+<!-- templates/shop/map.html -->
+{% extends 'shop/base.html' %}
+{% load static %}
+
+{% block title %}
+Карта
+{% endblock %}
+
+{% block content %}
+<style>
+    /* Установите размер карты */
+    #map {
+        width: 100%;
+        height: 400px;
+        margin-bottom: 30px;
+    }
+    .header {
+        height: 900px;
+        margin-bottom: 30px;
+    }
+
+    .list-unstyled li, i {
+        font-size: 16px !important;
+    }
+</style>
+
+<div class="container">
+    
+    <div class="text-center mt-5" id="map"></div>
+
+    <div class="row mt-5">
+        <div class="col-md-4">
+            <!-- Левая колонка для блока с контактами -->
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Наши контакты</h4>
+                    <ul class="list-unstyled">
+                        {% for contact in contacts %}
+                            <li class="mb-2">
+                                <i class="{{ contact.icon_class }}"></i> 
+                                {% if contact.contact_type == 'phone' %}
+                                    <a href="tel:{{ contact.value }}">{{ contact.value }}</a>
+                                {% elif contact.contact_type == 'email' %}
+                                    <a href="mailto:{{ contact.value }}">{{ contact.value }}</a>
+                                {% else %}
+                                    {{ contact.value }}
+                                {% endif %}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                    <p class="card-text"><strong>Расписание: </strong> Понедельник-Пятница: 9:00 - 18:00</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Яндекс Карты -->
+<script src="https://api-maps.yandex.ru/2.1/?apikey=9d0a556c-0869-4c4e-8ebc-d72d083b9d97&lang=ru_RU" type="text/javascript"></script>
+<script>
+    ymaps.ready(init);
+
+    function init() {
+        var myMap = new ymaps.Map("map", {
+            center: [41.244930, 69.187118], // Координаты центра карты
+            zoom: 12 // Уровень масштабирования карты
+        });
+
+        // Создаем метки для двух точек
+        var placemark1 = new ymaps.Placemark([41.259760, 69.161125], {
+            hintContent: "Точка 1",
+            balloonContent: "Координаты: 41.259760, 69.161125"
+        });
+
+        var placemark2 = new ymaps.Placemark([41.23010, 69.21361], {
+            hintContent: "Точка 2",
+            balloonContent: "Координаты: 41.23010, 69.21361"
+        });
+
+        // Добавляем метки на карту
+        myMap.geoObjects.add(placemark1);
+        myMap.geoObjects.add(placemark2);
+    }
+</script>
+{% endblock %}

@@ -1,0 +1,463 @@
+<!-- templates/shop/main_page.html -->
+{% extends 'shop/base.html' %}
+{% load static %}
+
+{% block title %}
+Главная страница | Akum.uz 
+{% endblock %}
+
+
+{% block content %}
+<div class="container-fluid mt-5">
+    <div id="carouselExampleIndicators" class="carousel slide">
+        <div class="carousel-indicators">
+            {% for banner in banners %}
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{ forloop.counter0 }}" class="{% if forloop.first %}active{% endif %}" aria-current="{% if forloop.first %}true{% else %}false{% endif %}" aria-label="Slide {{ forloop.counter }}"></button>
+            {% endfor %}
+        </div>
+        <div class="carousel-inner">
+            {% for banner in banners %}
+                <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                    {% if banner.link %}
+                        <a href="{{ banner.link }}" target="_blank"> <!-- Открытие ссылки в новой вкладке -->
+                            <img src="{{ banner.image.url }}" class="d-block w-100 carousel-img" alt="{{ banner.title }}">
+                        </a>
+                    {% else %}
+                        <img src="{{ banner.image.url }}" class="d-block w-100 carousel-img" alt="{{ banner.title }}">
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+
+    
+    <section class="advantages">
+        <div class="container">
+
+            <h2>Выбери свой аккумулятор</h2>
+            <div class="advantages__row">
+
+                <div class="swiper mySwiper" id="swiper1">
+
+                    <!-- Additional required wrapper -->
+                    <div class="swiper-wrapper">
+                        {% for battery in battery_cards %}
+                        <!-- Slides -->
+
+                        <div class="swiper-slide">
+                            {% if battery.link %}
+
+                            <a href="{{ battery.link }}">
+                                <img src="{{ battery.image.url }}" width="400px" alt="{{ battery.title }}">
+                            </a>
+                            {% else %}
+
+                            <img src="{{ battery.image.url }}" width="400px" alt="{{ battery.title }}">
+
+                            {% endif %}
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+            </div>
+        </div>
+    </section>
+
+<style>
+
+/* ... existing styles ... */
+
+@media (max-width: 768px) {
+    .swiper-slide {
+
+        margin-right: 10px; /* Добавляем отступы справа между слайдами */
+
+    }
+}
+</style>
+
+    <section class="category">
+        <div class="container">
+              <div class="banner-img">
+                {% if single_banner_4.image %}
+                <img src="{{ single_banner_4.image.url }}" alt="Banner 1">
+                {% else %}
+                <p>Изображение отсутствует</p>
+                {% endif %}
+              </div>
+          </div>
+        </div>
+        </div>
+      </section> 
+
+
+    <section class="advantages">
+        <div class="container">
+          <h2>Наши преимущества</h2>
+          <div class="advantages__row">
+            <div class="swiper mySwiper" id="swiper1">
+              <!-- Additional required wrapper -->
+              <div class="swiper-wrapper">
+                {% for advantage in advantages %}
+                <!-- Slides -->
+                <div class="swiper-slide">
+                    <div class="slide__ico"><img src="{{ advantage.icon.url }}" alt="{{ advantage.title }}"></div>
+                    <div class="slide__title">{{ advantage.title }}</div>
+                    <div class="slide__subtitle">{{ advantage.subtitle }}</div>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+          </div>
+        </div>
+      </section>
+
+
+
+      <div class="container banners_single">
+        <!-- Первый баннер -->
+        <div class="single-banner">
+            {% if single_banner_1.image %}
+            <img src="{{ single_banner_1.image.url }}" alt="Banner 1">
+            {% else %}
+            <p>Изображение отсутствует</p>
+            {% endif %}
+        </div>
+    
+        <!-- Контейнер для второго и третьего баннеров -->
+        <div class="row">
+            <!-- Второй баннер -->
+            <div class="col-md-6 col-12">
+                <div class="single-banner">
+                    {% if single_banner_2.image %}
+                    <img src="{{ single_banner_2.image.url }}" alt="Banner 2">
+                    {% else %}
+                    <p>Изображение отсутствует</p>
+                    {% endif %}
+                </div>
+            </div>
+    
+            <!-- Третий баннер -->
+            <div class="col-md-6 col-12">
+                <div class="single-banner">
+                    {% if single_banner_3.image %}
+                    <img src="{{ single_banner_3.image.url }}" alt="Banner 3">
+                    {% else %}
+                    <p>Изображение отсутствует</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+<style>
+.single-banner img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+ .banners_single .row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+    .banners_single .row {
+        flex-direction: column;
+    }
+    .banners_single .col-md-6 {
+        width: 100%;
+    }
+}
+
+    .advantages {
+    padding: 60px 0;
+}
+
+.advantages h2 {
+    text-align: left;
+    font-size: 36px;
+}
+
+.advantages__row {
+    position: relative;
+}
+
+.swiper {
+    width: 100%;
+    padding: 20px 0; /* Добавляем отступы сверху и снизу */
+}
+
+.swiper-slide {
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin: 10px; /* Добавляем отступы между слайдами */
+}
+
+.slide__ico img {
+    max-width: 100px;
+    margin-bottom: 15px;
+}
+
+.slide__title {
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.slide__subtitle {
+    color: #666;
+    font-size: 14px;
+}
+
+/* Стили для кнопок навигации Swiper */
+.swiper-button-prev, .swiper-button-next {
+    background-color: #fff;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 40%; /* Исправляем позиционирование кнопок */
+}
+
+.swiper-button-prev::after, .swiper-button-next::after {
+    color: #db0011; /* Цвет стрелок */
+}
+
+.swiper-button-prev {
+    left: -20px; /* Добавляем позиционирование слева */
+}
+
+.swiper-button-next {
+    right: -20px; /* Добавляем позиционирование справа */
+}
+    </style>
+
+    <style>
+        .services .card {
+            border: none;
+            height: 100%;
+            width: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            flex-grow: 1; /* Расширение карточки, чтобы заполнить доступное пространство */
+        }
+        
+        .card-body {
+            padding: 20px;
+        }
+        
+        /* Удалите отступы и маржи для .row, чтобы избежать влияния на позиционирование карточек */
+        .services .row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 50px;
+            margin: 0; /* Установите значение margin на 0 */
+        }
+        
+        /* Стили для заголовка */
+        .services-header {
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 10px 0;
+        }
+        
+        .card-title {
+            margin: 0;
+        } 
+        
+        .red-bar {
+            background-color: #db0011;
+            height: 10px;
+            width: 90%;
+            margin-top: -30px;
+        }
+        
+        .left {
+            margin-right: 15px;
+        }
+        
+        .right {
+            margin-left: 15px;
+        }
+        
+            </style>
+
+    <div class="container">
+        <section class="services">
+            <div class="container">
+                <div class="services-header">
+                    <div class="red-bar left"></div>
+                    <h2>Услуги</h2>
+                    <div class="red-bar right"></div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    {% for service in services %}
+                    <!-- Карточка услуги -->
+                    <div class="col-md-2 mb-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="slide__ico text-center">
+                                    <img src="{{ service.icon.url }}" width="80px" alt="{{ service.title }}">
+                                </div>
+                                <h5 class="card-title text-center">{{ service.title }}</h5>
+                                <p class="card-text text-center">{{ service.description }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section> 
+    </div>
+    </div>
+    
+
+    <!-- Добавляем стили для карусели -->
+<style>
+      	.header {
+    		background-color: rgb(230, 230, 230) !important;
+    	}
+    	.services .card {
+    	background: #e6e6e6;
+		}
+    .nav-link {
+      font-size: 19px;
+      font-weight: bold;
+    }
+    
+    .lang {
+      font-size: 26px;
+    }
+    
+    .mybutton {
+    border-radius: 10px;
+    background: #db0011;
+    color: #fff;
+    width: 165px;
+}
+
+.my_button {
+    border-radius: 10px;
+    background: #db0011;
+    color: #fff;
+    margin-top: 92px;
+}
+
+
+.carousel-item img {
+  height: 600px !important;
+}
+
+
+@media (max-width: 768px) {
+  .carousel-item img {
+  height: auto !important;
+  }
+  .scroller .images {
+  height: 90px !important;
+  }
+
+  .scroller {
+    margin-top: 40px !important;
+  }
+  }
+
+
+ 
+  .container_scroller {
+  overflow: hidden;
+  width: 100%;
+}
+
+.scroller {
+  display: flex;
+  margin-top: 150px;
+}
+
+.scroller  .images {
+  display: flex;
+  width: 320px;
+  height: 320px;
+}
+
+.scroller .images img {
+  margin-right: 20px; /* Adjust the spacing between images */
+}
+
+.production img {
+  width: 100%;
+  height: auto;
+}
+
+/* Responsive styles */
+@media (min-width: 576px) {
+            .swiper-slide {
+                width: calc((100% / 2) - 10px); /* 2 slides per view with some space */
+            }
+        }
+        @media (min-width: 768px) {
+            .swiper-slide {
+                width: calc((100% / 3) - 10px); /* 3 slides per view with some space */
+            }
+        }
+        @media (min-width: 992px) {
+            .swiper-slide {
+                width: calc((100% / 4) - 10px); /* 4 slides per view with some space */
+            }
+        }
+
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+    .carousel-inner {
+        max-height: 500px; /* Максимальная высота карусели */
+        overflow: hidden; /* Скрыть содержимое за пределами */
+    }
+    
+    .carousel-item img {
+        height: 100%; /* Высота изображений - 100% от высоты контейнера */
+        width: auto; /* Автоматическая ширина для сохранения пропорций */
+        object-fit: cover; /* Обрезка изображения для заполнения контейнера */
+    }
+    </style>
+{% endblock %}

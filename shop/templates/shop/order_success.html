@@ -1,0 +1,13 @@
+<!-- templates/shop/order_success.html -->
+
+{% extends 'shop/base_shop.html' %}
+
+{% block title %}Заказ успешно оформлен{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Спасибо за ваш заказ!</h2>
+    <p>Ваш заказ был успешно оформлен и принят в обработку. Мы свяжемся с вами в ближайшее время.</p>
+    <a href="{% url 'shop_page' %}" class="btn btn-primary">Вернуться к покупкам</a>
+</div>
+{% endblock %}

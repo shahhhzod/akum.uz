@@ -1,0 +1,130 @@
+{% extends 'shop/base_shop.html' %}
+
+{% load static %}
+
+{% block title %}{{ product.name }} - колготки.ру{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row">
+        <!-- Левая часть: Изображение продукта -->
+        <div class="col-lg-6 col-md-12 mb-4 mb-lg-0">
+            <!-- Основное изображение -->
+            <div class="product-main-img text-center mb-3">
+                <img id="mainProductImage" src="{{ product.images.first.image.url }}" alt="{{ product.name }}" class="img-fluid" style="max-height: 400px; cursor: pointer;" onclick="openModal(this.src)">
+            </div>
+            <!-- Превью изображений -->
+            <div class="product-thumbnails d-flex justify-content-center">
+                {% for image in product.images.all %}
+                <div class="mx-1">
+                    <img style="border:none;" src="{{ image.image.url }}" alt="{{ image.alt_text }}" width="60" height="80" class="img-thumbnail" style="cursor: pointer;" onclick="changeImage(this.src)">
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Правая часть: Описание и действия -->
+        <div class="col-lg-6 col-md-12">
+            <h2>{{ product.name }}</h2>
+          
+            <div class="price-box d-flex align-items-center mb-2">
+                <span class="product-price h4 text-danger mr-3 mt-1">{{ product.price }} UZS</span>
+                {% if product.discount_price %}
+                <span style="margin-left: 10px;" class="original-price text-muted text-decoration-line-through"> {{ product.discount_price }} UZS</span>
+                <span class="discount-badge ml-2 badge bg-success"></span>
+                {% endif %}
+            </div>
+            
+            <div class="mb-2">
+                <div class="d-inline-block">В наличии:</div> 
+                <span class="text-success">{{ product.stock }} шт</span>
+            </div>
+            
+            <form method="post" action="{% url 'add_to_cart' product.id %}" class="add-to-cart-form">
+                {% csrf_token %}
+                <div class="d-flex align-items-center mb-3">
+                    <div class="quantity-input d-flex align-items-center justify-content-between">
+                        <button class="btn btn-quantity" type="button" onclick="decrement()">-</button>
+                        <input type="number" name="quantity" id="quantity" value="1" data-max="{{ product.stock }}" min="1" max="{{ product.stock }}" class="quantity-display text-center" style="width: 60px;">
+                        <button class="btn btn-quantity" type="button" onclick="increment()">+</button>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-sm m-3">В корзину</button>
+                    </form>
+                <form method="post" action="{% url 'add_to_wishlist' product.id %}">
+                {% csrf_token %}
+                <button type="submit" class="wishlist-button add-to-wishlist d-flex justify-content-center align-items-center" style="height: 32px;">
+                    <i class="bi bi-heart{% if product.pk in wishlist %}-fill{% endif %}" style="font-size: 1rem;"></i>
+                </button>
+                </form>
+                </div>
+
+
+            <!-- Характеристики продукта -->
+            <div class="product-details">
+                <h5>Характеристики</h5>
+                <ul class="list-unstyled">
+                    <li><strong>Бренд:</strong> {{ product.brand.name }}</li>  <!-- Выводим название бренда -->
+                    <li><strong>Категория:</strong> {{ product.category.name }}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Описание, Отзывы, Доставка -->
+    <div class="mt-5">
+        <ul class="nav nav-tabs" id="productTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <a class="nav-link active" id="description-tab" data-bs-toggle="tab" href="#description" role="tab" aria-controls="description" aria-selected="true">Описание</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="delivery-tab" data-bs-toggle="tab" href="#delivery" role="tab" aria-controls="delivery" aria-selected="false">Доставка</a>
+            </li>
+        </ul>
+
+
+        <div class="tab-content" id="productTabContent">
+            <div class="tab-pane fade show active p-4" id="description" role="tabpanel" aria-labelledby="description-tab">
+                <p>{{ product.description }}</p>
+            </div>
+
+
+           <!-- Доставка -->
+           <div class="tab-pane fade p-4" id="delivery" role="tabpanel" aria-labelledby="delivery-tab">
+            <h5>Информация о доставке</h5>
+
+        </div>
+        </div>
+    </div>
+</div>
+
+<!-- Модальное окно Bootstrap для увеличенного изображения -->
+<div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <img id="modalImage" src="" class="img-fluid" alt="Enlarged Image">
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<script>
+function changeImage(src) {
+    document.getElementById('mainProductImage').src = src; // Изменение главного изображения
+}
+
+function openModal(src) {
+    document.getElementById('modalImage').src = src; // Устанавливаем изображение в модальном окне
+    var myModal = new bootstrap.Modal(document.getElementById('imageModal'), {
+        keyboard: false
+    });
+    myModal.show();
+}
+</script>
+{% endblock %}
+

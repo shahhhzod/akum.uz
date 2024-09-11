@@ -1,0 +1,49 @@
+{% extends 'shop/base_shop.html' %}
+
+{% block title %}{{ category.name }} | Akum.uz{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="mb-5">
+        <h2> Товары {{ category.name }}</h2>
+        <p>Найдено товаров: {{ products|length }}</p>
+    </div>
+    <div class="row">
+        <!-- Product Card -->
+        {% for product in products %}
+        <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-4">
+            <a class="text-decoration-none" href="{% url 'product_detail' product.pk %}"> <!-- Ссылка на детальный просмотр продукта -->
+                <div class="card product-card h-100 position-relative">
+                    <div class="card-img-top d-flex align-items-center justify-content-center">
+                        {% if product.images.first %}
+                            <img src="{{ product.images.first.image.url }}" alt="{{ product.images.first.alt_text }}" class="img-fluid">
+                        {% endif %}
+                    </div>
+                    <div class="card-body d-flex flex-column justify-content-between text-center">
+                        <h6 class="card-title">{{ product.name|truncatewords:10 }}</h6>
+                        {% if product.price %}
+                            <p class="card-text font-weight-bold">{{ product.price }} UZS</p>
+                        {% else %}
+                            <p class="card-text text-muted">Цена не указана</p>
+                        {% endif %}
+                    </div>
+                </a>
+                    <div class="d-flex justify-content-center gap-2 align-items-stretch">
+                        <form method="post" action="" class="add-to-cart d-flex align-items-stretch">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-cart btn-sm mt-2">В корзину</button>
+                        </form>
+                        <form method="post" action="{% url 'add_to_wishlist' product.pk %}">
+
+                            {% csrf_token %}
+                        <button type="submit" class="wishlist-button add-to-wishlist d-flex justify-content-center align-items-center p-1" style="height: 32px;">
+                            <i class="bi bi-heart{% if product.pk in wishlist %}-fill{% endif %}" style="font-size: 1rem;"></i>
+                        </button>
+                        </form>
+                    </div>
+                </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

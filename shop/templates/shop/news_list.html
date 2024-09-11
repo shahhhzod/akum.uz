@@ -1,0 +1,26 @@
+<!-- templates/shop/news_list.html -->
+{% extends 'shop/base.html' %}
+
+{% block title %}
+Новости | Akum.uz
+{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1>Новости</h1>
+    <div class="row mt-5">
+        {% for news_item in news_items %}
+            <div class="col-md-4">
+                <div style="border: none ;" class="card mb-4">
+                    <img src="{{ news_item.image.url }}" class="card-img-top" alt="{{ news_item.title }}">
+                    <div class="card-body">
+                        <h5 class="card-title mt-1">{{ news_item.title }}</h5>
+                        <p class="card-text mt-3">{{ news_item.content|truncatewords:20 }}</p>
+                        <a href="{{ news_item.get_absolute_url }}" class="btn btn-danger mt-3">Подробнее</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

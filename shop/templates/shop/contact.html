@@ -1,0 +1,112 @@
+{% extends 'shop/base.html' %}
+
+{% block title %}
+Контакты
+{% endblock %}
+
+{% block content %}
+<style>
+    .nav-link {
+        font-size: 19px;
+        font-weight: bold;
+    }
+
+    .lang {
+        font-size: 26px;
+    }
+
+    .mybutton {
+        border-radius: 10px;
+        background: #db0011;
+        color: #fff;
+        width: 165px;
+    }
+
+    .my_button {
+        border-radius: 10px;
+        background: #db0011;
+        color: #fff;
+        margin-top: 92px;
+    }
+
+    /* Отступы между input полями */
+    .contact-form input,
+    .contact-form textarea {
+        margin-bottom: 15px; /* Добавлен отступ снизу */
+    }
+
+     /* Позиционирование Toast уведомления */
+     .toast-container {
+        position: fixed;
+        bottom: 30px;  /* Отступ от нижнего края */
+        right: 30px;  /* Отступ от правого края */
+        z-index: 1055; /* Чтобы Toast был поверх других элементов */
+    }
+</style>
+
+<section class="container mt-5">
+    <div class="row">
+        <!-- Левая колонка с контактами -->
+        <div class="col-md-6"><br><br>
+            <div class="contact-info">
+                <h3>Контакты</h3>
+                {% for contact in contacts %}
+                <ul class="list-unstyled">
+                    <li>
+                        <i class="{{ contact.icon_class }}"></i>
+                        {% if contact.contact_type == 'phone' %}
+                            <a href="tel:{{ contact.value }}">{{ contact.value }}</a>
+                        {% elif contact.contact_type == 'email' %}
+                            <a href="mailto:{{ contact.value }}">{{ contact.value }}</a>
+                        {% else %}
+                            {{ contact.value }}
+                        {% endif %}
+                    </li>
+                </ul>
+                {% endfor %}
+            </div>
+        </div>
+
+       <!-- Правая колонка с формой обратной связи -->
+       <div class="col-md-6"><br><br>
+        <div class="contact-form">
+            <h3 class="text-center">Обратная связь</h3>
+            <p class="mb-4">Пожалуйста, заполните форму ниже, чтобы связаться с нами. Мы свяжемся с вами в ближайшее время.</p>
+
+            <form method="post" novalidate>
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-danger mt-3">Отправить сообщение</button>
+            </form>
+        </div>
+    </div>
+    </div>
+</section>
+
+
+<div class="toast-container">
+    {% if messages %}
+        {% for message in messages %}
+            <div class="toast align-items-center text-white bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="true">
+                <div class="d-flex">
+                    <div class="toast-body">
+                        {{ message }}
+                    </div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
+</div>
+
+<!-- Скрипт для активации Toast -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var toastElList = [].slice.call(document.querySelectorAll('.toast'));
+        var toastList = toastElList.map(function (toastEl) {
+            return new bootstrap.Toast(toastEl);  // Инициализация Toast Bootstrap
+        });
+        toastList.forEach(toast => toast.show());  // Показать каждый Toast
+    });
+</script>
+{% endblock %}

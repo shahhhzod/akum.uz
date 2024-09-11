@@ -1,0 +1,934 @@
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
+
+:root {
+    /* Main colors */
+    --blue: #db0011;
+    --whitebg: #FFFFFF;
+    --dgray: #A8A8A8;
+    --orange: #FF6F61;
+
+    /* Text colors */
+    --black: #1F2429;
+    --input: #AAAAAA;
+    --white: #FFFFFF;
+    --dgray-text: #7D7D7D;
+
+    /* Additional colors */
+    --sales: #FF6F61;
+    --blue-light: #4E8AFF;
+    --fill: #EFF7FF;
+    --green: #21AF49;
+    --gold: #FFB500;
+}
+
+/* General styling */
+body {
+    font-family: "Montserrat", sans-serif !important;
+    color: var(--dgray-text);
+    background-color: var(--whitebg);
+}
+
+
+.header {
+    background-color: var(--blue);
+    color: var(--white);
+}
+
+.footer {
+    margin-top: 140px;
+    background: #db0011;
+    color: #fff;
+    padding: 60px 0 35px 0;
+}
+
+.footer a {
+    color: white;
+    text-decoration: none;
+}
+
+.footer li {
+    list-style-type: none;
+}
+
+.footer-top {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #ed8088;
+}
+
+.footer-mid {
+    padding: 35px 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: end;
+    -ms-flex-align: end;
+    align-items: end;
+    border-bottom: 1px solid #ed8088;
+}
+
+.footer-list {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.list-title {
+    font-size: 24px;
+    font-weight: 600;
+    padding-bottom: 20px;
+}
+
+.list-item {
+    font-weight: 500;
+}
+
+.footer__content {
+    -ms-flex-preferred-size: 550px;
+    flex-basis: 550px;
+}
+
+
+.footer-bottom {
+    padding-top: 35px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+}
+
+.button-primary {
+    background-color: var(--orange);
+    color: var(--white);
+}
+
+.button-primary:hover {
+    background-color: var(--sales);
+}
+
+.input-field {
+    border: 1px solid var(--input);
+    background-color: var(--white);
+}
+
+.input-field:focus {
+    border-color: var(--blue);
+}
+
+.highlight {
+    background-color: var(--fill);
+}
+
+.success-message {
+    color: var(--green);
+}
+
+.warning-message {
+    color: var(--gold);
+}
+
+
+/* Custom styles for the top navbar */
+.top-navbar {
+    background: rgb(239, 245, 252);
+    padding: 10px;
+}
+
+.navbar-left i {
+    color: rgb(168, 168, 168);
+    font-size: 24px;
+}
+
+.navbar-left span {
+    color: rgb(31, 36, 41);
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 120%;
+    letter-spacing: 0px;
+    text-align: left;
+    margin: 0 6px;
+}
+
+.navbar-right .dropdown-toggle {
+    color: rgb(31, 36, 41);
+    font-family: "Montserrat", sans-serif;
+    font-weight: 400;
+    line-height: 120%;
+    letter-spacing: 0px;
+    text-align: left;
+    margin: 0 8px;
+}
+
+.navbar-right i {
+    color: rgb(168, 168, 168);
+    font-size: 22px;
+} 
+
+.navbar-right .dropdown-menu {
+    box-shadow: 0px 0px 31px 0px rgba(0, 0, 0, 0.1);
+    background: rgb(255, 255, 255);
+    border: none;
+    border-radius: 0px;
+}
+
+.navbar-right .dropdown-item {
+    color: #1F2429; /* Text color for dropdown items */
+}
+
+.navbar-right .dropdown-item:hover {
+    background-color: #F4F4F4; /* Background color on hover */
+}
+
+
+/* General header styles */
+.header-menu {
+    padding: 15px 0;
+    background: rgb(255, 255, 255);
+}
+
+.logo {
+    color: rgb(0, 51, 102);
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: none;
+    text-align: left;
+    text-transform: uppercase;
+}
+
+.search-input .form-control {
+    border-radius: 4px;
+    background-color: rgb(244, 244, 244);
+    height: 36px;
+    border: none;
+    color: rgb(170, 170, 170);
+    font-size: 14px;
+    font-weight: 400;
+    font-family: "Montserrat", sans-serif;
+    line-height: 100%;
+    letter-spacing: 0px;
+    text-align: left;
+}
+
+.search-input .input-group-text {
+    background-color: rgb(244, 244, 244);
+    border: none;
+    border-radius: 4px;
+    color: rgb(168, 168, 168);
+    color: rgb(170, 170, 170);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 100%;
+    letter-spacing: 0px;
+    text-align: left;
+}
+
+.social-icon {
+    color: var(--dgray);
+    font-size: 24px;
+    margin: 0 10px;
+}
+
+.icon-link {
+    color: var(--dgray);
+    font-size: 24px;
+    text-decoration: none;
+    position: relative;
+    margin: 0 20px;
+}
+
+.icon-link .badge {
+    top: -10px;
+    right: -10px;
+    font-size: 12px;
+    background: #db0011;
+    border: 2px solid rgb(255, 255, 255);
+    border-radius: 100%;
+    padding: 3px 6px;
+}
+
+.form-check-input:checked {
+    background-color: #db0011 !important;
+    border-color: #db0011 !important;
+}
+
+@media (max-width: 768px) {
+    .search-input {
+        margin-top: 10px;
+    }
+
+    .wishlist,
+    .cart {
+        margin-left: 10px;
+    }
+
+    .header-menu {
+        text-align: center;
+    }
+}
+
+@media (max-width: 576px) {
+    .logo {
+        font-size: 20px;
+    }
+
+    .search-input {
+        width: 100%;
+    }
+
+    .wishlist,
+    .cart {
+        margin-left: 8px;
+    }
+}
+
+
+/* Navbar styles */
+.navbar-custom {
+    background-color: #d11d01;
+    padding: 10px 0;
+    color: #FFFFFF; /* Белый текст для контраста */
+}
+
+
+.dropdown-menu {
+    box-shadow: 0px 0px 31px 0px rgba(0, 0, 0, 0.1) !important;
+    background: rgb(255, 255, 255) !important;
+    border: none !important;
+    border-radius: 0px !important;
+}
+
+.btn-catalog {
+    width: 161px;
+    height: 52px;
+    border-radius: 4px;
+    background-color: #db0011;
+    color: #fff;
+    color: rgb(255, 255, 255);
+    font-family: "Montserrat", sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 100%;
+    letter-spacing: 0px;
+    text-align: center;
+    border: none;
+}
+
+
+.dropdown-item.active, .dropdown-item:active {
+    color: var(--bs-dropdown-link-active-color);
+    text-decoration: none;
+    background-color: #db0011 !important;
+}
+
+.navbar-nav .nav-link {
+    color: rgb(255, 255, 255);
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 16px;
+    letter-spacing: 0%;
+    text-align: left;
+    margin: 0 10px;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #fff;
+}
+
+.navbar-text .work-hours,
+.navbar-text .phone-number {
+    color: #fff;
+    font-size: 14px;
+}
+
+.navbar-text .phone-number {
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+@media (max-width: 992px) {
+    .navbar-nav {
+        margin-top: 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar-custom {
+        text-align: center;
+    }
+
+    .btn-catalog {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .navbar-nav {
+        margin-top: 15px;
+        text-align: center;
+    }
+
+    .navbar-text {
+        margin-top: 15px;
+    }
+}
+
+@media (max-width: 576px) {
+    .navbar-nav .nav-link {
+        margin: 5px 0;
+    }
+
+    .navbar-text {
+        text-align: center;
+    }
+}
+
+
+/* Product Card Styles */
+.product-card {
+    border: none !important;
+    transition: transform 0.3s ease-in-out;
+    overflow: hidden;
+    height: 100%;
+}
+
+.product-card img {
+    width: 100%;
+    height: 200px; /* Задаем высоту для изображения */
+    overflow: hidden; /* Обрезаем изображение, если оно слишком большое */
+}
+
+.product-card .card-title {
+    color: rgb(31, 36, 41);
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 130%;
+    letter-spacing: 0%;
+    text-align: left;
+    text-decoration: none;
+    margin-bottom: 10px;
+    min-height: 50px; /* Минимальная высота для заголовка */
+}
+
+.product-card .card-text {
+    color: rgb(31, 36, 41) !important;
+    font-family: "Montserrat", sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 100%;
+    letter-spacing: 0px;
+    text-align: left;
+}
+
+.product-card .wishlist-icon {
+    box-sizing: border-box;
+    border: 2px solid rgb(170, 170, 170);
+    color: rgb(170, 170, 170);
+    width: 38px;
+    height: 38px;
+    border-radius: 4px;
+    display: block;
+}
+
+.product-card .btn-cart {
+    width: 122px;
+    height: 38px;
+    border-radius: 4px;
+    color: rgb(255, 255, 255);
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 100%;
+    letter-spacing: 0px;
+    text-align: center;
+    /* Main/Orange */
+    background: #db0011 !important;
+}
+
+
+.product-card .btn-cart:hover {
+    background-color: #db0011;  /* Немного темнее Тиффани цвет при наведении */    ;
+    color: rgb(255, 255, 255);
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+}
+
+@media (max-width: 1200px) {
+    .col-lg-2 {
+        flex: 0 0 20%;
+        max-width: 20%;
+    }
+}
+
+@media (max-width: 992px) {
+    .col-md-3 {
+        flex: 0 0 25%;
+        max-width: 25%;
+    }
+}
+
+@media (max-width: 768px) {
+    .col-sm-4 {
+        flex: 0 0 33.333%;
+        max-width: 33.333%;
+    }
+}
+
+@media (max-width: 576px) {
+    .col-6 {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+}
+
+
+/* Стили для попапа корзины */
+.cart-popup {
+    top: 40px;
+    right: 0;
+    z-index: 9999;
+    border-radius: 5px;
+    display: none;
+}
+
+.cart:hover .cart-popup {
+    display: block;
+}
+
+
+
+.btn-primary {
+    background-color: #db0011 !important;  /* Тиффани для кнопок */
+    color: #FFFFFF;  /* Белый текст на кнопках */
+    border: none !important;
+    padding: 10px 20px !important;
+    border-radius: 5px !important;
+}
+
+
+.btn-outline-primary {
+    --bs-btn-color: #db0011 !important;
+    --bs-btn-border-color: #db0011  !important;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: #db0011 !important;
+    --bs-btn-hover-border-color: #db0011  !important;
+    --bs-btn-focus-shadow-rgb: 13, 110, 253;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: #db0011  !important;
+    --bs-btn-active-border-color: #db0011  !important;
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    --bs-btn-disabled-color: #db0011  !important;
+    --bs-btn-disabled-bg: transparent;
+    --bs-btn-disabled-border-color: #db0011  !important;
+    --bs-gradient: none;
+}
+
+.btn-primary:hover {
+    background-color: #bb0514  !important;  /* Немного темнее Тиффани цвет при наведении */
+}
+
+.btn-danger {
+    background-color: #FF6F61 !important;
+    border-color: #FF6F61 !important;
+}
+
+.bg-orange {
+    background-color: #db0011;
+}
+
+.form-group label {
+    font-weight: bold;
+}
+
+.banner-slide {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: white;
+    position: relative;
+    border-radius: 8px;
+    z-index: 1;
+}
+
+.banner-slide::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    width: 7%; /* Увеличиваем ширину для большего пространства */
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    padding: 15px; /* Уменьшаем размер стрелок */
+    border-radius: 50%; /* Закругляем края стрелок */
+}
+
+.carousel-control-prev {
+    left: 10px; /* Отодвигаем стрелку влево */
+}
+
+.carousel-control-next {
+    right: 10px; /* Отодвигаем стрелку вправо */
+}
+
+
+.carousel-control-prev,
+.carousel-control-next {
+    z-index: 3 !important; /* Устанавливаем больший z-index, чтобы стрелки были выше контента */
+}
+
+.banner-slide .btn {
+    z-index: 5 !important; /* Кнопка должна быть выше стрелок */
+}
+
+/* Скрытие десктопной навигации на мобильных устройствах */
+@media (max-width: 991.98px) {
+    .navbar-expand-lg {
+        display: none !important;
+    }
+}
+
+/* Настройка стилей для мобильного Header */
+.navbar-light .navbar-toggler {
+    border-color: transparent;
+}
+
+.navbar-brand {
+    font-size: 1.2rem;
+    white-space: nowrap;
+    color: #004080;
+}
+
+.badge {
+    font-size: 0.7rem;
+}
+
+.navbar .container-fluid {
+    flex-wrap: nowrap; /* Предотвращаем перенос элементов на новую строку */
+}
+
+.icon-link img {
+    display: inline-block;
+}
+
+.icon-link .badge {
+    top: -5px;
+    right: -5px;
+}
+
+.bg-primary {
+    background-color: #0087B0 !important; /* Цвет фона для строки поиска */
+}
+
+.btn-link {
+    color: #aaa;
+    text-decoration: none;
+}
+
+.form-control {
+    border-radius: 4px;
+    box-shadow: none;
+    border: 1px solid #ccc;
+}
+
+
+.list-group-item {
+    border: none; /* Убираем границы */
+}
+
+.badge {
+    font-size: 0.8rem;
+}
+
+.collapse {
+    padding-left: 1rem;
+}
+
+/* Стили для мобильного меню */
+.offcanvas-header {
+    border-bottom: 1px solid #ddd;
+}
+
+.offcanvas-body h6 {
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+.btn-catalog img {
+    margin-right: 10px;
+}
+
+.cart-popup {
+    width: 300px;
+    top: 40px; /* Расположение по вертикали относительно иконки */
+    right: 0;
+    display: none;
+    z-index: 1050; /* Убедитесь, что поп-ап выше других элементов */
+}
+
+.cart-popup .list-group-item {
+    font-size: 14px; /* Размер текста для удобства */
+    padding: 8px; /* Внутренние отступы для элементов */
+}
+
+.cart-popup img {
+    width: 50px;
+    height: auto;
+    margin-right: 10px; /* Отступ между изображением и текстом */
+}
+
+.btn-close {
+    cursor: pointer; /* Курсор указателя для кнопки закрытия */
+}
+
+
+.quantity-input {
+    width: 150px; /* Ширина контейнера */
+    background-color: #f5f5f5; /* Цвет фона */
+    border-radius: 8px; /* Скругленные углы */
+    padding: 10px; /* Внутренний отступ */
+    text-align: center; /* Центрирование текста */
+    font-size: 1.2rem; /* Размер шрифта */
+}
+
+.btn-quantity {
+    background: none; /* Без фона */
+    border: none; /* Без рамки */
+    font-size: 1.5rem; /* Размер кнопки */
+    cursor: pointer; /* Указатель при наведении */
+    padding: 0 10px; /* Внутренний отступ */
+}
+
+.quantity-display {
+    border: none; /* Без рамки */
+    background: none; /* Без фона */
+    width: 30px; /* Ширина поля */
+    text-align: center; /* Центрирование текста */
+    font-size: 1.2rem; /* Размер шрифта */
+    margin: 0; /* Убираем отступы */
+}
+
+
+.nav-tabs .nav-link {
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: #333 !important;
+    font-size: 18px;
+}
+
+.nav-tabs .nav-link.active {
+    background-color: #f8f9fa;
+    color: #e63946 !important;
+    border-color: #e63946;
+}
+
+.btn-block {
+    width: 100%;
+}
+
+.btn-outline-primary, .btn-outline-danger {
+    width: 48%;
+    margin-top: 20px;
+}
+
+.btn-outline-primary i, .btn-outline-danger i {
+    margin-right: 5px;
+}
+
+
+.text-orange {
+    color: #F7F7F7;
+}
+
+
+.btn-custom-small {
+    padding: 0.25rem 0.75rem; /* Размеры кнопки */
+    font-size: 0.875rem; /* Размер шрифта */
+    border-radius: 0.25rem; /* Радиус углов кнопки */
+}
+
+.btn-custom-sm {
+    padding: 0.1rem 0.4rem; /* Минимальные отступы */
+    font-size: 0.75rem; /* Уменьшенный размер шрифта */
+    line-height: 1; /* Плоская кнопка */
+    border-radius: 0.2rem; /* Небольшой радиус */
+    box-shadow: none; /* Убираем тень */
+    min-width: auto; /* Убираем минимальную ширину */
+}
+
+.wishlist-button {
+    width: 45px; /* Уменьшенная ширина кнопки */
+    height: 40px !important; /* Уменьшенная высота кнопки */
+    border: 2px solid #ccc; /* Цвет рамки */
+    border-radius: 8px; /* Радиус для скругления */
+    background-color: transparent; /* Прозрачный фон */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 7px;
+    cursor: pointer;
+    outline: none;
+    padding: 0; /* Убираем внутренние отступы */
+    transition: all 0.3s ease; /* Плавный переход */
+    position: relative; /* Позиционирование для значка */
+}
+
+.wishlist-button i {
+    font-size: 20px; /* Размер иконки */
+    color: #999; /* Серая иконка по умолчанию */
+    transition: color 0.3s ease; /* Плавный переход цвета */
+}
+
+.wishlist-button.active {
+    border-color: #ff4d4d; /* Цвет рамки при активном состоянии */
+    background-color: #fdfdfd; /* Цвет фона при активном состоянии */
+}
+
+.wishlist-button.active i {
+    color: #ff4d4d; /* Красная иконка при нажатии */
+}
+
+
+.icon-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.icon-size {
+    width: 34px; /* Устанавливаем одинаковый размер для иконок */
+    height: 34px;
+}
+
+.position-relative {
+    position: relative;
+}
+
+.badge {
+    font-size: 12px;
+    padding: 0.25em 0.5em;
+}
+
+.wishlist .badge,
+.cart .badge {
+    top: 0;
+    right: 0;
+    transform: translate(50%, -50%);
+}
+
+
+.bi-star-fill, .bi-star {
+    font-size: 1.25rem; /* Размер звездочек */
+    margin-right: 0.3rem; /* Пробел между звездочками */
+}
+.text-warning {
+    color: #ffc107 !important; /* Цвет заполненной звездочки */
+}
+.text-muted {
+    color: #e4e5e9; /* Цвет пустой звездочки */
+}
+
+.star {
+    font-size: 1.8rem;
+    cursor: pointer;
+    margin-right: 0.3rem; /* Пробел между звездочками */
+    color: #ccc; /* Цвет невыбранных звезд */
+}
+
+.star.checked {
+    color: #ffc107; /* Цвет выбранных звезд */
+}
+
+.star:hover,
+.star:hover ~ .star {
+    color: #ffc107; /* Цвет звезд при наведении */
+}
+
+.text-rating {
+    color: rgb(170, 170, 170);
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 150%;
+    letter-spacing: 0%;
+    text-align: left;
+}
+
+
+/* custom.css */
+.form-control {
+    border-radius: 8px;
+    padding: 10px 15px;
+    background-color: #f6f6f6;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    width: 100%;
+}
+
+.form-control::placeholder {
+    color: #b0b0b0;
+}
+
+.form-control:focus {
+    border-color: #ff6f61;
+    outline: none;
+    box-shadow: none;
+}
+
+
+.social-login-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+
+.btn-google {
+    background-color: #f5f5f5;
+    color: #757575;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.btn-google img {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+
+.btn-facebook {
+    background-color: #1877f2;
+    color: #fff;
+    border: none;
+}
+
+.btn-facebook i {
+    margin-right: 10px;
+}
+
