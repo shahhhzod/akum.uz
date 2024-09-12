@@ -331,6 +331,38 @@ document.addEventListener('DOMContentLoaded', showCookieConsent);
     
 
     {% include 'shop/footer_main.html' %}
+
+
+    <style>
+        /* ... существующие стили ... */
+
+        @media (max-width: 768px) {
+  .footer-top, .footer-mid, .footer-bottom {
+    text-align: center;
+  }
+  .footer-list {
+    display: block;
+    margin-bottom: 20px;
+  }
+  .footer-list .list-title {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+  }
+  .footer-list .list-item, .footer-list .nav-item {
+    display: block;
+    margin-bottom: 5px;
+  }
+  .footer__social a {
+    display: inline-block;
+    margin: 0 10px;
+  }
+  .footer-top {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+    </style>
             </div>
 
             <div class="toast-container position-fixed bottom-0 end-0 p-3">
