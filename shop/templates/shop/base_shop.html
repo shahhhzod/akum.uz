@@ -159,12 +159,12 @@
         <!-- Иконки справа -->
         <div class="d-flex align-items-center">
             <!-- Иконка вишлиста -->
-            <a href="" class="icon-link position-relative me-3">
+            <a href="{% url 'wishlist' %}" class="icon-link position-relative me-3">
                 <img src="{% static 'images/icons/wpf_like.svg' %}" width="34px" height="34px" alt="wishlist">
                 <span class="badge badge-pill badge-danger position-absolute top">{{ wishlist_count }}</span>
             </a>
             <!-- Иконка корзины -->
-            <a href="" class="icon-link position-relative me-3">
+            <a href="{% url 'cart_detail' %}" class="icon-link position-relative me-3">
                 <img src="{% static 'images/icons/cart.svg' %}" width="24px" height="24px" alt="cart">
                 <span class="badge badge-pill badge-danger position-absolute top">{{ cart_item_count }}</span>
             </a>

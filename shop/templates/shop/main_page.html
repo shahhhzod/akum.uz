@@ -38,14 +38,17 @@
         </button>
     </div>
 
-    
     <section class="advantages">
+
         <div class="container">
 
             <h2>Выбери свой аккумулятор</h2>
+
             <div class="advantages__row">
 
+
                 <div class="swiper mySwiper" id="swiper1">
+
 
                     <!-- Additional required wrapper -->
                     <div class="swiper-wrapper">
@@ -57,10 +60,13 @@
 
                             <a href="{{ battery.link }}">
                                 <img src="{{ battery.image.url }}" width="400px" alt="{{ battery.title }}">
+
                             </a>
+
                             {% else %}
 
                             <img src="{{ battery.image.url }}" width="400px" alt="{{ battery.title }}">
+
 
                             {% endif %}
                         </div>
@@ -70,19 +76,26 @@
 
                 <div class="swiper-button-prev"></div>
                 <div class="swiper-button-next"></div>
+
             </div>
+
         </div>
     </section>
 
 <style>
 
-/* ... existing styles ... */
-
-@media (max-width: 768px) {
-    .swiper-slide {
+.swiper-slide {
         margin-right: 10px; /* Добавляем отступы справа между слайдами */
+
+        display: flex;
+
+        justify-content: center; /* Центрируем карточки */
+
     }
-}
+    .swiper-slide img {
+        width: 100%; /* Устанавливаем ширину изображения на 100% */
+        max-width: 400px; /* Максимальная ширина изображения */
+    }
 </style>
 
     <section class="category">

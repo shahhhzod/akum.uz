@@ -69,10 +69,16 @@
                         <ul class="navbar-nav me-auto top-nav">
                         </ul>
                         <ul class="navbar-nav me-auto bottom-nav">
-                            <li class="nav-item">
-                                <div class="dropdown">
-                                    <a href="{% url 'produktsiya' %}" class="nav-link {% if request.resolver_match.url_name == 'produktsiya' %}active{% endif %}">Продукция</a>
-                                </div>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle {% if request.resolver_match.url_name == 'produktsiya' %}active{% endif %}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: white;">Продукция</a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="width: auto;">
+
+                                    {% for product_page in product_pages %}
+                                    <li><a class="dropdown-item" href="{{ product_page.get_absolute_url }}">{{ product_page.name }}</a></li>
+
+                                    {% endfor %}
+                                </ul>
+
                             </li>
                             <li class="nav-item">
                                 <a href="{% url 'contact' %}" class="nav-link {% if request.resolver_match.url_name == 'contact' %}active{% endif %}">Контакты</a>

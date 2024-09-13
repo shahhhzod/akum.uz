@@ -21,7 +21,7 @@
         {% if results %}
             {% for product in results %}
             <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-4">
-                <a class="text-decoration-none" href="">
+                <a class="text-decoration-none" href="{% url 'product_detail' product.pk %}">
                     <div class="card product-card h-100 position-relative">
                         <div class="card-img-top d-flex align-items-center justify-content-center">
                             {% if product.images.first %}
