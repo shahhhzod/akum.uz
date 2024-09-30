@@ -1,3 +1,4 @@
+{% load i18n %}
 {% load static %}  
 <header class="header">
 <div class="container">
@@ -16,7 +17,7 @@
                 <ul class="navbar-nav me-auto top-nav">
                     <li class="nav-item">
                         <div class="dropdown">
-                            <a href="{% url 'produktsiya' %}" class="nav-link {% if request.resolver_match.url_name == 'produktsiya' %}active{% endif %}">Продукция</a>
+                            <a href="{% url 'produktsiya' %}" class="nav-link {% if request.resolver_match.url_name == 'produktsiya' %}active{% endif %}"><p>{% trans "Продукция" %}</p></a>
                             <div class="dropdown-content">
                                 {% for product_page in product_pages %}
                                 <a class="list-item" href="{{ product_page.get_absolute_url }}">{{ product_page.name }}</a>
@@ -25,36 +26,56 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a href="{% url 'contact' %}" class="nav-link {% if request.resolver_match.url_name == 'contact' %}active{% endif %}">Контакты</a>
+                        <a href="{% url 'contact' %}" class="nav-link {% if request.resolver_match.url_name == 'contact' %}active{% endif %}"><p>{% trans "Контакты" %}</p></a>
                     </li>
                     <li class="nav-item">
-                        <a href="{% url 'news' %}" class="nav-link {% if request.resolver_match.url_name == 'news' %}active{% endif %}">Новости</a>
+                        <a href="{% url 'news' %}" class="nav-link {% if request.resolver_match.url_name == 'news' %}active{% endif %}"><p>{% trans "Новости" %}</p></a>
                     </li>
                     <li class="nav-item">
-                        <a href="{% url 'map' %}" class="nav-link {% if request.resolver_match.url_name == 'map' %}active{% endif %}">Карта</a>
+                        <a href="{% url 'map' %}" class="nav-link {% if request.resolver_match.url_name == 'map' %}active{% endif %}"><p>{% trans "Карта" %}</p>
+                        </a>
                     </li>
                 </ul>
                 <ul class="navbar-nav me-auto bottom-nav">
                 </ul>
             </div>
-            <form class="d-flex" name="search" method="post" action="">
+            <form class="d-flex" name="search" method="post" action="{% url 'search' %}" onsubmit="return validateSearch()">
                 {% csrf_token %}
                 <div class="castom-input">
                     <input class="form-control me-2" name="product" required="required" placeholder="Поиск">
                 </div>
                 <div class="fl">
                     <div class="lang">
-                        <a href="">
-                            <img src="{% static 'img/uzbekistan.svg' %}" width="24px" alt="">
-                        </a>
-                        <a href="">
-                            <img src="{% static 'img/rus.png' %}" width="24px" alt="">
-                        </a>
-                        <a href="">
-                            <img src="{% static 'img/Great Britain.svg' %}" width="24px" alt="">
-                        </a>
+                   
+                        <form action="{% url 'set_language' %}" method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="next" value="{{ request.path }}">
+                            <input type="hidden" name="language" value="en">
+                            <a href="#" onclick="this.closest('form').submit();">
+                                <img src="{% static 'img/Great Britain.svg' %}" width="24px" alt="English">
+                            </a>
+                        </form>
+                        
+                        <form action="{% url 'set_language' %}" method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="next" value="{{ request.path }}">
+                            <input type="hidden" name="language" value="ru">
+                            <a href="#" onclick="this.closest('form').submit();">
+                                <img src="{% static 'img/rus.png' %}" width="24px" alt="Russian">
+                            </a>
+                        </form>
+                        
+                        <form action="{% url 'set_language' %}" method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="next" value="{{ request.path }}">
+                            <input type="hidden" name="language" value="uz">
+                            <a href="#" onclick="this.closest('form').submit();">
+                                <img src="{% static 'img/uzbekistan.svg' %}" width="24px" alt="Uzbek">
+                            </a>
+                        </form>
+
                     </div>
-                    <a class="btn mybutton shop" href="{% url 'shop_page' %}">Онлайн магазин</a>
+                    <a class="btn mybutton shop" href="{% url 'shop_page' %}"><p>{% trans "Онлайн магазин" %}</p></a>
                 </div>
             </form>
         </div>

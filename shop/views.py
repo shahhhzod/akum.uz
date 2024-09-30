@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Product, News, ContactTicket, Banner, Service, ProductPage, Advantage, SingleBanner, BatteryCard, BatteryInfo, Cart, CartItem, Order, OrderItem, BannerShop, Category
+from .models import Product, News, ContactTicket, Banner, Service, ProductPage, Advantage, SingleBanner, BatteryCard, BatteryInfo, Cart, CartItem, Order, OrderItem, BannerShop, Category, ProductItem
 from django.contrib import messages
 from .forms import ContactForm, SearchForm
 from django.core.paginator import Paginator
@@ -12,8 +12,8 @@ def get_cart(request):
     """Get or create a cart for the current session."""
     session_key = request.session.session_key
     if not session_key:
-        request.session.create()
-    cart, created = Cart.objects.get_or_create(session_key=request.session.session_key)
+        request.session.save()  # Сохраните сессию, чтобы создать session_key
+    cart, created = Cart.objects.get_or_create(session_key=session_key)
     return cart
 
 def main_page(request):
@@ -141,14 +141,17 @@ def product_detail(request, pk):
     return render(request, 'shop/product_detail.html', context)
 
 def add_to_cart(request, product_id):
-    cart = get_cart(request)
+    cart = get_cart(request)  # Получите или создайте корзину
     product = get_object_or_404(Product, id=product_id)
+    session_key = request.session.session_key  # Получите session_key
+    
+    # Проверьте, есть ли уже товар в корзине
     cart_item, created = CartItem.objects.get_or_create(cart=cart, product=product)
-
+    
     if not created:
         cart_item.quantity += 1
-    cart_item.save()
-
+        cart_item.save()
+    
     messages.success(request, f"{product.name} успешно добавлен в корзину.")
     return redirect('cart_detail')
 
@@ -202,13 +205,12 @@ def update_cart(request):
 def order_success(request):
     return render(request, 'shop/order_success.html')
 
-
 def cart_detail(request):
     session_key = request.session.session_key
     if not session_key:
-        request.session.cycle_key()
+        request.session.save()  # Создает session_key, если его нет
     cart, created = Cart.objects.get_or_create(session_key=session_key)
-
+    
     context = {
         'cart_items': cart.items.all(),
         'total_price': cart.get_total_price(),
@@ -297,3 +299,8 @@ def category_products(request, category_id):
     }
 
     return render(request, 'shop/category_products.html', context)
+
+
+def produktsiya_page(request):
+    products = ProductItem.objects.all()
+    return render(request, 'shop/products.html', {'products': products})
