@@ -366,19 +366,3 @@ class BannerShop(models.Model):
 
     def __str__(self):
         return self.title if self.title else "Без названия"
-
-
-class ProductItem(models.Model):
-    title = models.CharField(max_length=255, verbose_name="Заголовок")
-    description = models.TextField(verbose_name="Описание")
-    image = models.ImageField(upload_to='products/', verbose_name="Изображение")
-    button_text = models.CharField(max_length=50, default="Подробнее", verbose_name="Текст кнопки")
-    button_link = models.URLField(blank=True, null=True, verbose_name="Ссылка кнопки")
-
-    class Meta:
-        verbose_name = "Элемент продукции"
-        verbose_name_plural = "Элементы продукции"
-
-    def __str__(self):
-        return self.title
-    

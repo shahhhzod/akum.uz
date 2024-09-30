@@ -23,6 +23,7 @@ ALLOWED_HOSTS = os.getenv('DJANGO_ALLOWED_HOSTS', '').split(',')  # Загруж
 # Application definition
 
 INSTALLED_APPS = [
+    'simpleui',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -31,22 +32,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'shop',
 ]
-
-
-# Настройка доступных языков
-LANGUAGES = [
-    ('ru', _('Russian')),
-    ('en', _('English')),
-    ('uz', _('Uzbek')),
-]
-
-# Настройка языка по умолчанию
-LANGUAGE_CODE = 'ru'  # Основной язык
-
-LOCALE_PATHS = [
-    os.path.join(BASE_DIR, 'shop', 'locale'),
-]
-
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

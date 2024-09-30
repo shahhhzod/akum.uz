@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Contact, SocialLink, ProductPage, ContactTicket, News, Banner, Service, Advantage, SingleBanner, BatteryCard, BatteryInfo, Category, Product, ProductImage, Brand, Cart, BannerShop, Order, OrderItem, ProductItem
+from .models import Contact, SocialLink, ProductPage, ContactTicket, News, Banner, Service, Advantage, SingleBanner, BatteryCard, BatteryInfo, Category, Product, ProductImage, Brand, Cart, BannerShop, Order, OrderItem
 
 
 class ProductImageInline(admin.TabularInline):
@@ -111,10 +111,6 @@ class OrderAdmin(admin.ModelAdmin):
     list_display = ['id', 'full_name', 'email', 'phone', 'payment_method', 'delivery_method', 'created_at']
     list_filter = ['created_at', 'payment_method', 'delivery_method']
     search_fields = ['full_name', 'email', 'phone']
-
-@admin.register(ProductItem)
-class ProductItemAdmin(admin.ModelAdmin):
-    list_display = ('title', 'button_text', 'button_link')
 
 admin.site.register(Order, OrderAdmin)
 admin.site.register(OrderItem)
