@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Product, News, ContactTicket, Banner, Service, ProductPage, Advantage, SingleBanner, BatteryCard, BatteryInfo, Cart, CartItem, Order, OrderItem, BannerShop, Category
+from .models import Product, News, ContactTicket, Banner, Service, ProductPage, Advantage, SingleBanner, BatteryCard, BatteryInfo, Cart, CartItem, Order, OrderItem, BannerShop, Category, ProductItem
 from django.contrib import messages
 from .forms import ContactForm, SearchForm
 from django.core.paginator import Paginator
@@ -297,3 +297,9 @@ def category_products(request, category_id):
     }
 
     return render(request, 'shop/category_products.html', context)
+
+
+
+def produktsiya_page(request):
+    products = ProductItem.objects.all()  # Например, список всех продуктов
+    return render(request, 'shop/produktsiya.html', {'products': products})

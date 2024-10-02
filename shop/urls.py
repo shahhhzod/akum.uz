@@ -1,14 +1,14 @@
 # shop/urls.py
 from django.urls import path
 from . import views
-from .views import product_detail, add_to_cart, remove_from_cart, update_cart, cart_detail, checkout, order_success, add_to_wishlist, remove_from_wishlist, wishlist_view, category_products
+from .views import product_detail, add_to_cart, remove_from_cart, update_cart, cart_detail, checkout, order_success, add_to_wishlist, remove_from_wishlist, wishlist_view, category_products, produktsiya_page
 
 urlpatterns = [
     path('', views.main_page, name='main_page'),
     path('shop/', views.shop_page, name='shop_page'),
     path('product/<int:pk>/', product_detail, name='product_detail'),
-    path('produktsiya/', views.produktsiya_page, name='produktsiya'),
-    path('produktsiya/<slug:slug>/', views.product_page, name='product_page'),
+    path('produktsiya/', produktsiya_page, name='products_page'),  # Список продукции
+    path('produktsiya/<slug:slug>/', views.product_page, name='product_page'),  # Детальный просмотр продукта
     path('search/', views.search, name='search'),
     path('product/<int:pk>/', product_detail, name='product_detail'),  # URL для детального просмотра продукта
     path('contact/', views.contact_page, name='contact'),  # Новый маршрут для страницы контактов
