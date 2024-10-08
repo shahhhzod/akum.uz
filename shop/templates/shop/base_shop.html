@@ -107,6 +107,11 @@
             .btn-catalog::after {
                 display: none;
             }
+
+            .dropdown-item:hover {
+    background-color: #db0011; /* Цвет фона при наведении */
+    color: #fff; /* Цвет текста при наведении (например, белый для контраста) */
+}
         </style>
 
         
@@ -315,6 +320,35 @@ document.addEventListener('DOMContentLoaded', showCookieConsent);
     text-decoration: none;
     color: #0ABAB5; /* Цвет ссылки */
     padding: 0; /* Убираем отступы */
+}
+
+.product-card {
+    height: 100%; /* Карточки занимают 100% доступной высоты */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Разделение контента в карточке */
+}
+
+.card-img-top {
+    height: 200px; /* Устанавливаем фиксированную высоту для изображения */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; /* Скроем все, что выходит за пределы */
+}
+
+.card-img-top img {
+    width: auto;
+    height: 100%; /* Изображение займет всю высоту, сохраняя пропорции */
+    object-fit: cover; /* Поддержка правильного отображения изображений */
+}
+
+.card-body {
+    flex-grow: 1; /* Занимает всё доступное пространство */
+}
+
+.btn-cart {
+    width: 100%; /* Кнопка "В корзину" по всей ширине карточки */
 }
 </style>
 

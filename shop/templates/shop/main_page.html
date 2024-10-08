@@ -83,18 +83,24 @@
     </section>
 
 <style>
-
 .swiper-slide {
-        margin-right: 10px; /* Добавляем отступы справа между слайдами */
+    margin-right: 10px; /* Отступ между слайдами */
+    display: flex;
+    justify-content: center; /* Центрирование слайдов */
+    width: 150px; /* Уменьшаем ширину слайдов до 150px */
+}
 
-        display: flex;
+.swiper-slide img {
+    width: 100%; /* Ширина изображения на 100% от слайда */
+    max-width: 320px; /* Максимальная ширина изображения 150px */
+    height: auto; /* Сохранение пропорций изображений */
+}
 
-        justify-content: center; /* Центрируем карточки */
-    }
-    .swiper-slide img {
-        width: 100%; /* Устанавливаем ширину изображения на 100% */
-        max-width: 400px; /* Максимальная ширина изображения */
-    }
+/* Ограничиваем ширину контейнера для слайдера */
+.swiper {
+    max-width: 100%; /* Ширина слайдера относительно экрана */
+    margin: 0 auto; /* Центрируем слайдер на странице */
+}
 </style>
 
     <section class="category">
@@ -135,16 +141,18 @@
         </div>
       </section>
 
-
-
       <div class="container banners_single">
         <!-- Первый баннер -->
-        <div class="single-banner">
-            {% if single_banner_1.image %}
-            <img src="{{ single_banner_1.image.url }}" alt="Banner 1">
-            {% else %}
-            <p>Изображение отсутствует</p>
-            {% endif %}
+        <div class="row">
+            <div class="col-12">
+                <div class="single-banner">
+                    {% if single_banner_1.image %}
+                    <img src="{{ single_banner_1.image.url }}" alt="Banner 1">
+                    {% else %}
+                    <p>Изображение отсутствует</p>
+                    {% endif %}
+                </div>
+            </div>
         </div>
     
         <!-- Контейнер для второго и третьего баннеров -->
@@ -173,14 +181,36 @@
         </div>
     </div>
     
+    <style>
+        .single-banner img {
+            width: 100%; /* Устанавливаем изображение на всю ширину баннера */
+            height: auto; /* Сохраняем пропорции изображения */
+            border-radius: 10px;
+        }
+    
+        /* Увеличиваем отступы между баннерами, чтобы по углам был воздух */
+        .single-banner {
+            margin-bottom: 20px;
+        }
+    
+        /* Выравниваем второй и третий баннер по 50% ширины для средних экранов и больше */
+        @media (min-width: 768px) {
+            .col-md-6 .single-banner {
+                padding: 0 10px; /* Добавляем отступы для баннеров по углам */
+            }
+        }
+    
+        /* Для маленьких экранов ширина баннеров будет 100% */
+        @media (max-width: 767px) {
+            .single-banner .col-md-6 {
+                padding: 0;
+            }
+        }
+    </style>
+    
+    
 
 <style>
-.single-banner img {
-    width: 100%;
-    height: auto;
-    border-radius: 10px;
-    margin-bottom: 20px;
-}
 
  .banners_single .row {
     display: flex;
@@ -224,7 +254,6 @@
     align-items: center;
     text-align: center;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    margin: 10px; /* Добавляем отступы между слайдами */
 }
 
 .slide__ico img {
@@ -315,7 +344,7 @@
         
         .left {
             margin-right: 15px;
-        }
+        }   
         
         .right {
             margin-left: 15px;

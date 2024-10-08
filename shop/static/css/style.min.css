@@ -554,49 +554,33 @@ h2 {
 }
 
 .advantages {
-  margin-top: 110px;
+  margin-top: 110px
 }
 
 .advantages__row {
-  position: relative;
+  position: relative
 }
 
-.swiper {
-  width: 100%; /* Устанавливаем ширину слайдера на 100% */
-  padding: 20px 0; /* Добавляем немного отступов по вертикали */
-}
-
-.swiper-wrapper {
-  display: flex; /* Используем flexbox для выравнивания по центру */
-  justify-content: center; /* Центрируем слайды по горизонтали */
-}
 
 .swiper-slide {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
   flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
   justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
   text-align: center;
   background-color: #fff;
   padding: 10px;
   border-radius: 10px;
-  min-height: 280px;
-  width: 300px; /* Задаем фиксированную ширину для карточек */
-  margin: 0 10px; /* Добавляем отступы между карточками */
-}
-
-/* Убираем отступы для кнопок на мобильных устройствах */
-.swiper-button-prev, .swiper-button-next {
-  left: -20px;
-  right: -20px;
-}
-
-/* Адаптивные стили для мобильных устройств */
-@media (max-width: 576px) {
-  .swiper-slide {
-    width: 80%; /* Уменьшаем ширину карточек для мобильных */
-    margin: 0 auto; /* Центрируем карточки */
-  }
+  min-height: 280px
 }
 
 .slide__ico {
